@@ -38,7 +38,7 @@ int main(){
   // test case 1: if the card is trashed, the playedCardCount should increate by 1;
   // and the last element of playCards should be equal to the trashed card 
   printf("Beging testing discardCard() function. Case 1. ----------------------\n");
-  discardCard(handPos, 0, &testG, 0); 
+  discardCard(handPos, 0, &testG, 1); 
 
   printf("Testing that the deck pile remain the same after discardCard() being called: ");
   asserttrue(isSameArray(testG.deck[currentPlayer], G.deck[currentPlayer], testG.deckCount[currentPlayer]));
@@ -73,7 +73,7 @@ int main(){
   
   printf("Beging testing discardCard() function. Case 2. ----------------------\n");
   memcpy(&testG, &G, sizeof(struct gameState));
-  discardCard(handPos, 0, &testG, 1); 
+  discardCard(handPos, 0, &testG, 0); 
 
   //printGameState(&G, currentPlayer);
   //printGameState(&testG, currentPlayer);

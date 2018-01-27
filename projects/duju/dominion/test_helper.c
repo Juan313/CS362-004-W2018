@@ -27,6 +27,16 @@ int* removeElementFromArray(int* originalArray,int size, int handPos){
 
 }
 
+int* addElementToArray(int* originalArray,int size, int added){
+  int* newArray = malloc((size+1)*sizeof(int));
+  int i = 0;
+  for (; i<size; ++i){
+    newArray[i] = originalArray[i];
+  }
+  newArray[size] = added;
+  return newArray;
+}
+
 void printGameState(struct gameState* G, int player){
 
    int i;
