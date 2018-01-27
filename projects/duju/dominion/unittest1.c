@@ -1,5 +1,6 @@
 #include "dominion.h"
 #include "dominion_helpers.h"
+#include "test_helper.h"
 #include "rngs.h"
 #include <stdlib.h>
 #include <stdio.h>
@@ -105,33 +106,33 @@ int main(){
   printf("Beging testing discardCard() function. Case 1. ----------------------\n");
   discardCard(handPos, 0, &testG, 0); 
 
-  printf("Testing that the deck pile remain the same after discardCard() being called\n");
-  assert(isSameArray(testG.deck[currentPlayer], G.deck[currentPlayer], testG.deckCount[currentPlayer]));
+  printf("Testing that the deck pile remain the same after discardCard() being called: ");
+  asserttrue(isSameArray(testG.deck[currentPlayer], G.deck[currentPlayer], testG.deckCount[currentPlayer]));
 
-  printf("testG.deckCount[currentPlayer] = %d, expected = %d \n", testG.deckCount[currentPlayer], G.deckCount[currentPlayer]); 
-  assert(testG.deckCount[currentPlayer] == G.deckCount[currentPlayer]); 
+  printf("testG.deckCount[currentPlayer] = %d, expected = %d: ", testG.deckCount[currentPlayer], G.deckCount[currentPlayer]); 
+  asserttrue(testG.deckCount[currentPlayer] == G.deckCount[currentPlayer]); 
 
-  printf("testG.handcount = %d, expected = %d \n", testG.handCount[currentPlayer], G.handCount[currentPlayer]-1); 
-  assert(testG.handCount[currentPlayer] == G.handCount[currentPlayer]-1); 
+  printf("testG.handcount = %d, expected = %d: ", testG.handCount[currentPlayer], G.handCount[currentPlayer]-1); 
+  asserttrue(testG.handCount[currentPlayer] == G.handCount[currentPlayer]-1); 
   int* newHandArray = removeElementFromArray(G.hand[currentPlayer], G.handCount[currentPlayer], handPos);
-  printf("Testing that the hand card pile is the same after removing from original hand\n");
-  assert(isSameArray(testG.hand[currentPlayer], newHandArray, testG.handCount[currentPlayer]));
+  printf("Testing that the hand card pile is the same after removing from original hand: ");
+  asserttrue(isSameArray(testG.hand[currentPlayer], newHandArray, testG.handCount[currentPlayer]));
   free(newHandArray);
 
-  printf("testG.discardCount[currentPlayer] = %d, expected = %d \n", testG.discardCount[currentPlayer], G.discardCount[currentPlayer]); 
-  assert(testG.discardCount[currentPlayer] == G.discardCount[currentPlayer]); 
+  printf("testG.discardCount[currentPlayer] = %d, expected = %d: ", testG.discardCount[currentPlayer], G.discardCount[currentPlayer]); 
+  asserttrue(testG.discardCount[currentPlayer] == G.discardCount[currentPlayer]); 
 
-  printf("Testing that the discard pile remain the same after discardCard() being called\n");
-  assert(isSameArray(testG.discard[currentPlayer], G.discard[currentPlayer], testG.discardCount[currentPlayer]));
+  printf("Testing that the discard pile remain the same after discardCard() being called: ");
+  asserttrue(isSameArray(testG.discard[currentPlayer], G.discard[currentPlayer], testG.discardCount[currentPlayer]));
 
-  printf("testG.playedCardCount = %d, expected = %d \n", testG.playedCardCount, G.playedCardCount+1); 
-  assert(testG.playedCardCount == G.playedCardCount + 1); 
+  printf("testG.playedCardCount = %d, expected = %d: ", testG.playedCardCount, G.playedCardCount+1); 
+  asserttrue(testG.playedCardCount == G.playedCardCount + 1); 
 
-  printf("Testing that the last element of playCard in testG is the same as the current hand in gameState G\n");
-  assert(testG.playedCards[testG.playedCardCount-1] == G.hand[currentPlayer][handPos]);
-  printf("Tesing that the playedcard pile is the same as before after removing the last element\n");
+  printf("Testing that the last element of playCard in testG is the same as the current hand in gameState G: ");
+  asserttrue(testG.playedCards[testG.playedCardCount-1] == G.hand[currentPlayer][handPos]);
+  printf("Tesing that the playedcard pile is the same as before after removing the last element: ");
   int* newPlayedArray = removeElementFromArray(testG.playedCards, testG.playedCardCount, testG.playedCardCount-1);
-  assert(isSameArray(G.playedCards,newPlayedArray, G.playedCardCount));
+  asserttrue(isSameArray(G.playedCards,newPlayedArray, G.playedCardCount));
   free(newPlayedArray);
 
   // test case 2: if the card is discarded, the discard pile should increase count by 1, the last element of discard pile should be the discarded card.
@@ -140,35 +141,35 @@ int main(){
   memcpy(&testG, &G, sizeof(struct gameState));
   discardCard(handPos, 0, &testG, 1); 
 
-  printGameState(&G, currentPlayer);
-  printGameState(&testG, currentPlayer);
-  printf("Testing that the deck pile remain the same after discardCard() being called\n");
-  assert(isSameArray(testG.deck[currentPlayer], G.deck[currentPlayer], testG.deckCount[currentPlayer]));
+  //printGameState(&G, currentPlayer);
+  //printGameState(&testG, currentPlayer);
+  printf("Testing that the deck pile remain the same after discardCard() being called: ");
+  asserttrue(isSameArray(testG.deck[currentPlayer], G.deck[currentPlayer], testG.deckCount[currentPlayer]));
 
-  printf("testG.deckCount[currentPlayer] = %d, expected = %d \n", testG.deckCount[currentPlayer], G.deckCount[currentPlayer]); 
-  assert(testG.deckCount[currentPlayer] == G.deckCount[currentPlayer]); 
+  printf("testG.deckCount[currentPlayer] = %d, expected = %d: ", testG.deckCount[currentPlayer], G.deckCount[currentPlayer]); 
+  asserttrue(testG.deckCount[currentPlayer] == G.deckCount[currentPlayer]); 
 
-  printf("testG.handcount = %d, expected = %d \n", testG.handCount[currentPlayer], G.handCount[currentPlayer]-1); 
-  assert(testG.handCount[currentPlayer] == G.handCount[currentPlayer]-1); 
+  printf("testG.handcount = %d, expected = %d: ", testG.handCount[currentPlayer], G.handCount[currentPlayer]-1); 
+  asserttrue(testG.handCount[currentPlayer] == G.handCount[currentPlayer]-1); 
   newHandArray = removeElementFromArray(G.hand[currentPlayer], G.handCount[currentPlayer], handPos);
-  printf("Testing that the hand card pile is the same after removing from original hand\n");
-  assert(isSameArray(testG.hand[currentPlayer], newHandArray, testG.handCount[currentPlayer]));
+  printf("Testing that the hand card pile is the same after removing from original hand: ");
+  asserttrue(isSameArray(testG.hand[currentPlayer], newHandArray, testG.handCount[currentPlayer]));
   free(newHandArray);
 
-  printf("testG.discardCount[currentPlayer] = %d, expected = %d \n", testG.discardCount[currentPlayer], G.discardCount[currentPlayer]+1); 
-  assert(testG.discardCount[currentPlayer] == G.discardCount[currentPlayer]+1); 
+  printf("testG.discardCount[currentPlayer] = %d, expected = %d: ", testG.discardCount[currentPlayer], G.discardCount[currentPlayer]+1); 
+  asserttrue(testG.discardCount[currentPlayer] == G.discardCount[currentPlayer]+1); 
 
-  printf("Tesing that the discard pile is the same as before after removing the last element\n");
+  printf("Tesing that the discard pile is the same as before after removing the last element: ");
   int* newDiscard = removeElementFromArray(testG.discard[currentPlayer],testG.discardCount[currentPlayer], testG.discardCount[currentPlayer]-1);
-  assert(isSameArray(newDiscard, G.discard[currentPlayer], G.discardCount[currentPlayer]));
+  asserttrue(isSameArray(newDiscard, G.discard[currentPlayer], G.discardCount[currentPlayer]));
 
-  printf("Testing that the last element of discard pile in testG is the same as the current hand in gameState G\n");
-  assert(testG.discard[currentPlayer][testG.discardCount[currentPlayer]-1] == G.hand[currentPlayer][handPos]);
+  printf("Testing that the last element of discard pile in testG is the same as the current hand in gameState G: ");
+  asserttrue(testG.discard[currentPlayer][testG.discardCount[currentPlayer]-1] == G.hand[currentPlayer][handPos]);
 
-  printf("testG.playedCardCount = %d, expected = %d \n", testG.playedCardCount, G.playedCardCount); 
-  assert(testG.playedCardCount == G.playedCardCount); 
+  printf("testG.playedCardCount = %d, expected = %d: ", testG.playedCardCount, G.playedCardCount); 
+  asserttrue(testG.playedCardCount == G.playedCardCount); 
 
-  printf("Testing that the playedCard pile remain the same after discardCard() being called\n");
-  assert(isSameArray(testG.playedCards, G.playedCards, G.playedCardCount));
+  printf("Testing that the playedCard pile remain the same after discardCard() being called: ");
+  asserttrue(isSameArray(testG.playedCards, G.playedCards, G.playedCardCount));
   return 0;
 }

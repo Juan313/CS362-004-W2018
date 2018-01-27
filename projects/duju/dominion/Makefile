@@ -2,6 +2,8 @@ CFLAGS = -Wall -fpic -coverage -lm
 
 rngs.o: rngs.h rngs.c
 	gcc -c rngs.c -g  $(CFLAGS)
+test_helper.o: test_helper.h test_helper.c
+	gcc -c test_helper.c -g $(CFLAGS)
 
 dominion.o: dominion.h dominion.c rngs.o
 	gcc -c dominion.c -g  $(CFLAGS)
@@ -18,8 +20,8 @@ badTestDrawCard: badTestDrawCard.c dominion.o rngs.o
 testBuyCard: testDrawCard.c dominion.o rngs.o
 	gcc -o testDrawCard -g  testDrawCard.c dominion.o rngs.o $(CFLAGS)
 
-testDiscardCard: testDiscardCard.c dominion.o  rngs.o
-	gcc -o testDiscardCard -g testDiscardCard.c dominion.o rngs.o $(CFLAGS)
+unittest1: unittest1.c dominion.o  rngs.o test_helper.o
+	gcc -o unittest1 -g unittest1.c dominion.o rngs.o test_helper.o $(CFLAGS)
 
 testAll: dominion.o testSuite.c
 	gcc -o testSuite testSuite.c -g  dominion.o rngs.o $(CFLAGS)
