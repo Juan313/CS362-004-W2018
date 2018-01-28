@@ -88,3 +88,27 @@ bool isSameArray(int* array1, int* array2, int size){
   }
   return true;  
 }
+
+void clearHandPile(struct gameState* G, int player){
+  int i = 0;
+  for (; i< G->handCount[player]; ++i){
+    G->hand[player][i] = -1;
+  }
+  G->handCount[player] = 0;
+}
+
+void clearDeckPile(struct gameState* G, int player){
+  int i = 0;
+  for (; i< G->deckCount[player]; ++i){
+    G->deck[player][i] = -1;
+  }
+  G->deckCount[player] = 0;
+}
+
+void clearDiscardPile(struct gameState* G, int player){
+  int i = 0;
+  for (; i< G->discardCount[player]; ++i){
+    G->discard[player][i] = -1;
+  }
+  G->discardCount[player] = 0;
+}
