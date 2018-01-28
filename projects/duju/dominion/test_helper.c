@@ -75,7 +75,7 @@ void asserttrue(bool statement){
   if (statement)
     printf("TEST SUCCESSFULLY COMPLETED!\n");
   else 
-    printf("TEST FAILED!!!!\n");
+    printf("TEST FAILED!!!!!!!!!!!!!!!!!!!!!!!!!\n");
 }
 
 bool isSameArray(int* array1, int* array2, int size){
