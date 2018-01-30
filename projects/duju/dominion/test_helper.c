@@ -41,7 +41,7 @@ void printGameState(struct gameState* G, int player){
 
    int i;
    printf("The player is %d\n", player); 
-   printf("The turn is %d\n", G->whoseTurn); 
+   //printf("The turn is %d\n", G->whoseTurn); 
    printf("Handcounts: %d\n", G->handCount[player]); 
    printf("current hand is: "); 
    for (i=0; i<G->handCount[player]; ++i){
@@ -63,12 +63,14 @@ void printGameState(struct gameState* G, int player){
    }
    printf("\n");
 
+  /*
    printf("playedcard count is: %d\n", G->playedCardCount); 
    printf("played card is: "); 
    for (i=0; i<G->playedCardCount; ++i){
      printf("%d\t", G->playedCards[i]); 
    }
    printf("\n");
+   */
 }
 void asserttrue(bool statement){
 
@@ -111,4 +113,38 @@ void clearDiscardPile(struct gameState* G, int player){
     G->discard[player][i] = -1;
   }
   G->discardCount[player] = 0;
+}
+
+void fillPile(struct gameState* G, int player, int flag, int *array, int size){
+  // flag =0, fill the hand pile
+  if (flag == 0) {
+    clearHandPile(G, player);
+    int i = 0;
+    for (; i<size; ++i) {
+      G->hand[player][i] = array[i];
+      G->handCount[player]++;
+    }
+    return;
+  } 
+  // flag =1, fill the deck pile
+  if (flag == 1) {
+    clearDeckPile(G, player);
+    int i = 0;
+    for (; i<size; ++i) {
+      G->deck[player][i] = array[i];
+      G->deckCount[player]++;
+    }
+    return;
+  } 
+  // flag =2, fill the discard pile
+  if (flag == 2) {
+    clearDiscardPile(G, player);
+    int i = 0;
+    for (; i<size; ++i) {
+      G->discard[player][i] = array[i];
+      G->discardCount[player]++;
+    }
+    return;
+  } 
+
 }

@@ -12,6 +12,7 @@ bool isSameArray(int* array1, int* array2, int size);
 void clearHandPile(struct gameState* G, int player);
 void clearDeckPile(struct gameState* G, int player);
 void clearDiscardPile(struct gameState* G, int player);
+void fillPile(struct gameState* G, int player, int flag, int *array, int size);
 
 #endif
 
