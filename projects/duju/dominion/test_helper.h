@@ -15,6 +15,7 @@ void clearDiscardPile(struct gameState* G, int player);
 void fillPile(struct gameState* G, int player, int flag, int *array, int size);
 int* joinArrays(int* arr1, int size1, int* arr2, int size2);
 void printArray(int* arr, int size);
+int* joinThreeArrays(int* arr1, int size1, int* arr2, int size2, int* arr3, int size3);
 #endif
 
 

@@ -160,6 +160,24 @@ int* joinArrays(int* arr1, int size1, int* arr2, int size2){
   } 
   return joined;
 }
+
+int* joinThreeArrays(int* arr1, int size1, int* arr2, int size2, int* arr3, int size3){
+  int* joined = malloc(sizeof(int)*(size1+size2+size3));
+  int i = 0;
+  for (; i<size1; ++i){
+    joined[i] = arr1[i];
+  }
+  int j = 0;
+  for (; j<size2; ++j){
+    joined[size1+j] = arr2[j];
+  } 
+  int k = 0;
+  for (; k<size3; ++k){
+    joined[size1+size2+k] = arr3[k];
+  } 
+  return joined;
+}
+
 void printArray(int* arr, int size){
   int i = 0;
   for (; i<size; ++i){
