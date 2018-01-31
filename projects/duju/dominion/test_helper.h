@@ -13,7 +13,8 @@ void clearHandPile(struct gameState* G, int player);
 void clearDeckPile(struct gameState* G, int player);
 void clearDiscardPile(struct gameState* G, int player);
 void fillPile(struct gameState* G, int player, int flag, int *array, int size);
-
+int* joinArrays(int* arr1, int size1, int* arr2, int size2);
+void printArray(int* arr, int size);
 #endif
 
 

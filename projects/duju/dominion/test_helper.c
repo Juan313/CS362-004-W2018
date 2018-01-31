@@ -146,5 +146,25 @@ void fillPile(struct gameState* G, int player, int flag, int *array, int size){
     }
     return;
   } 
+}
+
+int* joinArrays(int* arr1, int size1, int* arr2, int size2){
+  int* joined = malloc(sizeof(int)*(size1+size2));
+  int i = 0;
+  for (; i<size1; ++i){
+    joined[i] = arr1[i];
+  }
+  int j = 0;
+  for (; j<size2; ++j){
+    joined[size1+j] = arr2[j];
+  } 
+  return joined;
+}
+void printArray(int* arr, int size){
+  int i = 0;
+  for (; i<size; ++i){
+    printf("%d\t",arr[i]);
+  }
+  printf("\n");
 
 }
