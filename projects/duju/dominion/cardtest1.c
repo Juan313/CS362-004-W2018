@@ -40,6 +40,8 @@ int main(){
   memcpy(&testG, &G, sizeof(struct gameState));
   cardEffectSmithy(currentPlayer, &testG, 2);
   
+  printf("testG.numActions = %d, expected = %d: ", testG.numActions, G.numActions); 
+  asserttrue(testG.numActions == G.numActions); 
   printf("testG.handCount[currentPlayer] = %d, expected = %d: ", testG.handCount[currentPlayer], G.handCount[currentPlayer]+2); 
   asserttrue(testG.handCount[currentPlayer] == G.handCount[currentPlayer]+2); 
   printf("Testing that the content of the hand pile is correct after smithy is played:  ");
@@ -87,6 +89,8 @@ int main(){
   cardEffectSmithy(currentPlayer, &testG, 2);
   //printGameState(&testG, currentPlayer);
   
+  printf("testG.numActions = %d, expected = %d: ", testG.numActions, G.numActions); 
+  asserttrue(testG.numActions == G.numActions); 
   printf("testG.handCount[currentPlayer] = %d, expected = %d: ", testG.handCount[currentPlayer], G.handCount[currentPlayer]+2); 
   asserttrue(testG.handCount[currentPlayer] == G.handCount[currentPlayer]+2); 
 

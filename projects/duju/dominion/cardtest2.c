@@ -25,6 +25,11 @@ int main(){
   printf("Begin  testing adventurer card---------------------------------------\n");
   printf("case1: the deck contains at least two treasure card-----------------:\n");
 
+  int numAction = G.numActions; 
+  
+  printf("G.numActions = %d, expected = %d: ", G.numActions, numAction); 
+  asserttrue(G.numActions == numAction); 
+
   handPile = malloc(4 * sizeof(int));
   deckPile = malloc(5 * sizeof(int));
   discardPile = malloc(6 * sizeof(int));
@@ -46,6 +51,7 @@ int main(){
   handPileAfter =(int[6]){copper, adventurer, smithy, estate, silver, gold};
   deckPileAfter =(int[2]){curse, steward};
   discardPileAfter =(int[7]){curse, estate, silver, gold, village, gardens, smithy};
+
   printf("G.handCount[currentPlayer] = %d, expected = %d: ", G.handCount[currentPlayer],6); 
   asserttrue(G.handCount[currentPlayer] == 6); 
   printf("check that the hand pile is correct after adventurer card being played: ");
@@ -75,11 +81,14 @@ int main(){
   fillPile(&G, currentPlayer, 1, deckPile, 4);
   discardPile =(int[6]){curse, estate, silver, gold, village, gardens};
   fillPile(&G, currentPlayer, 2, discardPile, 6);
-   
+  
+  numAction = G.numActions; 
   //printGameState(&G, currentPlayer); 
   cardEffectAdventurer(currentPlayer, &G, 1);
   //printGameState(&G, currentPlayer); 
   
+  printf("G.numActions = %d, expected = %d: ", G.numActions, numAction); 
+  asserttrue(G.numActions == numAction); 
   discardPileAfter =(int[3]){curse, steward, smithy};
 
   printf("G.handCount[currentPlayer] = %d, expected = %d: ", G.handCount[currentPlayer],6); 

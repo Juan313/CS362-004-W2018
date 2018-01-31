@@ -1333,14 +1333,14 @@ int cardEffectRemodel(int currentPlayer, struct gameState *state, int choice1, i
 {
       int j;
       // bug #5: swap choice1 with choice2
-      j = state->hand[currentPlayer][choice2];  //store card we will trash
+      j = state->hand[currentPlayer][choice1];  //store card we will trash
 
-      if ( (getCost(state->hand[currentPlayer][choice2]) + 2) > getCost(choice1) )
+      if ( (getCost(state->hand[currentPlayer][choice1]) + 2) > getCost(choice2) )
 	{
 	  return -1;
 	}
 
-      gainCard(choice1, state, 0, currentPlayer);
+      gainCard(choice2, state, 0, currentPlayer);
 
       //discard card from hand
       discardCard(handPos, currentPlayer, state, 0);
@@ -1355,7 +1355,6 @@ int cardEffectRemodel(int currentPlayer, struct gameState *state, int choice1, i
 	      break;
 	    }
 	}
-
 
       return 0;
 }

@@ -63,14 +63,12 @@ void printGameState(struct gameState* G, int player){
    }
    printf("\n");
 
-  /*
    printf("playedcard count is: %d\n", G->playedCardCount); 
    printf("played card is: "); 
    for (i=0; i<G->playedCardCount; ++i){
      printf("%d\t", G->playedCards[i]); 
    }
    printf("\n");
-   */
 }
 void asserttrue(bool statement){
 
@@ -81,13 +79,21 @@ void asserttrue(bool statement){
 }
 
 bool isSameArray(int* array1, int* array2, int size){
-  qsort ((void*)(array1), size, sizeof(int), cmp); 
-  qsort ((void*)(array2), size, sizeof(int), cmp); 
+  int* arr1 = malloc(sizeof(int)*size);
+  int* arr2 = malloc(sizeof(int)*size);
+  qsort ((void*)(arr1), size, sizeof(int), cmp); 
+  qsort ((void*)(arr2), size, sizeof(int), cmp); 
   int i = 0;
   for (; i<size; ++i){
-    if (array1[i] != array2[i])
+    if (arr1[i] != arr2[i])
+    {
+      free(arr1);
+      free(arr2);
       return false;
+    }
   }
+  free(arr1);
+  free(arr2);
   return true;  
 }
 
@@ -113,6 +119,14 @@ void clearDiscardPile(struct gameState* G, int player){
     G->discard[player][i] = -1;
   }
   G->discardCount[player] = 0;
+}
+
+void clearPlayedPile(struct gameState* G){
+  int i = 0;
+  for (; i< G->playedCardCount; ++i){
+    G->playedCards[i] = -1;
+  }
+  G->playedCardCount = 0;
 }
 
 void fillPile(struct gameState* G, int player, int flag, int *array, int size){
@@ -143,6 +157,16 @@ void fillPile(struct gameState* G, int player, int flag, int *array, int size){
     for (; i<size; ++i) {
       G->discard[player][i] = array[i];
       G->discardCount[player]++;
+    }
+    return;
+  } 
+  // flag =3, fill the played pile
+  if (flag == 3) {
+    clearPlayedPile(G);
+    int i = 0;
+    for (; i<size; ++i) {
+      G->playedCards[i] = array[i];
+      G->playedCardCount++;
     }
     return;
   } 
