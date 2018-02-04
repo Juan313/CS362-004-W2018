@@ -116,5 +116,7 @@ int main(){
 //  printArray(joined3, testG.handCount[currentPlayer]+testG.deckCount[currentPlayer]);
    
   asserttrue(isSameArray(joined2, joined3,size1+size2+G.discardCount[currentPlayer]));
+  printf("End of testing smithy card---------------------------------------\n");
+  printf("\n\n"); 
   return 0;
 }

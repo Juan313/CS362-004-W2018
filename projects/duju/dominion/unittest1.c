@@ -105,5 +105,7 @@ int main(){
 
   printf("Testing that the playedCard pile remain the same after discardCard() being called: ");
   asserttrue(isSameArray(testG.playedCards, G.playedCards, G.playedCardCount));
+  printf("End of testing discardCard() function.----------------------\n"); 
+  printf("\n\n"); 
   return 0;
 }

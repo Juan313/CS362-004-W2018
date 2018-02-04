@@ -123,5 +123,7 @@ int main(){
 
   free(joined1);
   free(joined2);
+  printf("End of testing village card---------------------------------------\n");
+  printf("\n\n");
   return 0;
 }

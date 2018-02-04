@@ -20,6 +20,7 @@ int main(){
   int* kingdom = kingdomCards(smithy, adventurer, mine, village, feast, gardens,baron, steward, tribute, cutpurse);
   initializeGame(numPlayers, kingdom, seed, &G); 
 
+  printf("Begin testing scoreFor() function.----------------------\n"); 
   // testing the initial game setup
   printf("testing the initial game setup.\n ");
   int i = 0;
@@ -121,6 +122,7 @@ int main(){
   }
   printf("player's score = %d, expected = %d:", scoreFor(currentPlayer, &G), 4); 
   asserttrue(scoreFor(currentPlayer, &G) == 4); 
-
+  printf("End of testing scoreFor() function.----------------------\n"); 
+  printf("\n\n"); 
   return 0;
 }

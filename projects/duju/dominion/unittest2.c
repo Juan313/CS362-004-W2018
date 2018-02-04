@@ -122,5 +122,7 @@ int main(){
   printf("Testing that the discard pile is the same before and after the drawCard operation: "); 
   asserttrue(isSameArray(G.discard[currentPlayer], testG.discard[currentPlayer], G.discardCount[currentPlayer]));
 
+  printf("End of testing drawCard() function.----------------------\n"); 
+  printf("\n\n"); 
   return 0;
 }

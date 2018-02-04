@@ -81,9 +81,16 @@ void asserttrue(bool statement){
 bool isSameArray(int* array1, int* array2, int size){
   int* arr1 = malloc(sizeof(int)*size);
   int* arr2 = malloc(sizeof(int)*size);
+  int i = 0;
+  for (; i<size; ++i){
+    arr1[i] = array1[i];
+    arr2[i] = array2[i];
+  }
   qsort ((void*)(arr1), size, sizeof(int), cmp); 
   qsort ((void*)(arr2), size, sizeof(int), cmp); 
-  int i = 0;
+  //printArray(arr1, size);
+  //printArray(arr2, size);
+  i=0;
   for (; i<size; ++i){
     if (arr1[i] != arr2[i])
     {

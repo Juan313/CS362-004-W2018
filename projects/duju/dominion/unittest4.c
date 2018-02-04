@@ -20,6 +20,7 @@ int main(){
   int* kingdom = kingdomCards(smithy, adventurer, mine, village, feast, gardens,baron, steward, tribute, cutpurse);
   initializeGame(numPlayers, kingdom, seed, &G); 
 
+  printf("Beging testing fullDeckCount() function. ----------------------\n");
   // testing the initial game setup
   printf("testing the count of copper: ");
   int currentPlayer = 2;
@@ -67,5 +68,7 @@ int main(){
   printf("fullDeckCount = %d, expected = %d:", fullDeckCount(currentPlayer, card3, &G), 15); 
   asserttrue(fullDeckCount(currentPlayer,card3,&G) == 15); 
  
+  printf("End of testing fullDeckCount() function. ----------------------\n");
+  printf("\n\n"); 
   return 0;
 }

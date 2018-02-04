@@ -41,7 +41,9 @@ int main(){
   discardPile =(int[6]){curse, estate, silver, gold, village, gardens};
   fillPile(&G, currentPlayer, 2, discardPile, 6);
    
+//  printGameState(&G, currentPlayer); 
   cardEffectAdventurer(currentPlayer, &G, 1);
+//  printGameState(&G, currentPlayer); 
   
   int *handPileAfter, *deckPileAfter, *discardPileAfter;
   handPileAfter = malloc(6*sizeof(int));
@@ -113,5 +115,7 @@ int main(){
   int* joined1 = joinThreeArrays(handPile,4,deckPile,4,discardPile,6);
   int* joined2 = joinThreeArrays(G.hand[currentPlayer],G.handCount[currentPlayer],G.deck[currentPlayer], G.deckCount[currentPlayer], G.discard[currentPlayer], G.discardCount[currentPlayer]);
   asserttrue(isSameArray(joined1, joined2, 14));
+  printf("End of testing adventurer card---------------------------------------\n");
+  printf("\n\n");
   return 0;
 }

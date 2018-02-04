@@ -78,5 +78,7 @@ int main(){
   printf("check that the played pile is correct after remodel card being played: ");
   asserttrue(isSameArray(playedPileAfter, testG.playedCards,MAX(3, testG.playedCardCount))); 
 
+  printf("End of testing remodel card---------------------------------------\n");
+  printf("\n\n");
   return 0;
 }
