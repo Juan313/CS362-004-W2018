@@ -6,6 +6,9 @@ rngs.o: rngs.h rngs.c
 dominion.o: dominion.h dominion.c rngs.o
 	gcc -c dominion.c -g  $(CFLAGS)
 
+test_helper.o: test_helper.h test_helper.c rngs.o 
+	gcc -c test_helper.c -g $(CFLAGS)
+
 playdom: dominion.o playdom.c
 	gcc -o playdom playdom.c -g dominion.o rngs.o $(CFLAGS)
 #To run playdom you need to entere: ./playdom <any integer number> like ./playdom 10*/
@@ -20,6 +23,19 @@ testBuyCard: testDrawCard.c dominion.o rngs.o
 
 testAll: dominion.o testSuite.c
 	gcc -o testSuite testSuite.c -g  dominion.o rngs.o $(CFLAGS)
+
+randomtestcard1: randomtestcard1.c dominion.o rngs.o test_helper.o
+	gcc -o randomtestcard1 -g randomtestcard1.c dominion.o rngs.o test_helper.o $(CFLAGS)
+randomtestcard2: randomtestcard2.c dominion.o rngs.o test_helper.o
+	gcc -o randomtestcard2 -g randomtestcard2.c dominion.o rngs.o test_helper.o $(CFLAGS)
+randomtestcard3: randomtestcard3.c dominion.o rngs.o test_helper.o
+	gcc -o randomtestcard3 -g randomtestcard3.c dominion.o rngs.o test_helper.o $(CFLAGS)
+randomtest: randomtestcard1 randomtestcard2 randomtestcard3
+	./randomtestcard1 > randomtestcard1.out
+	./randomtestcard2 > randomtestcard2.out
+	./randomtestcard3 > randomtestcard3.out
+
+randomTest: randomtestcard1
 
 interface.o: interface.h interface.c
 	gcc -c interface.c -g  $(CFLAGS)

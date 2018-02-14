@@ -1,0 +1,212 @@
+        -:    0:Source:randomtestcard1.c
+        -:    0:Graph:randomtestcard1.gcno
+        -:    0:Data:randomtestcard1.gcda
+        -:    0:Runs:4
+        -:    0:Programs:1
+        -:    1:#include "dominion.h"
+        -:    2:#include "dominion_helpers.h"
+        -:    3:#include "test_helper.h"
+        -:    4:#include "rngs.h"
+        -:    5:#include <stdlib.h>
+        -:    6:#include <stdio.h>
+        -:    7:#include <string.h>
+        -:    8:#include <assert.h>
+        -:    9:#include <math.h>
+        -:   10:#include <stdbool.h>
+        -:   11:
+function TreasureCardInDeck called 40000 returned 100% blocks executed 100%
+    40000:   12:int TreasureCardInDeck(struct gameState* g, int player){
+    40000:   12-block  0
+    40000:   13:  int i = 0;
+    40000:   14:  int sum = 0;
+ 10065972:   15:  for (; i<g->deckCount[player]; ++i){
+    40000:   15-block  0
+unconditional  0 taken 40000
+ 10025972:   15-block  1
+unconditional  1 taken 10025972
+ 10065972:   15-block  2
+branch  2 taken 10025972
+branch  3 taken 40000 (fallthrough)
+ 10025972:   16:    int card = g->deck[player][i];
+ 10025972:   17:    if (card == 4 || card == 5 || card == 6)
+ 10025972:   17-block  0
+branch  0 taken 9653172 (fallthrough)
+branch  1 taken 372800
+  9653172:   17-block  1
+branch  2 taken 9279956 (fallthrough)
+branch  3 taken 373216
+  9279956:   17-block  2
+branch  4 taken 373516 (fallthrough)
+branch  5 taken 8906440
+  1119532:   18:      sum += 1;
+  1119532:   18-block  0
+unconditional  0 taken 1119532
+        -:   19:  }
+    40000:   20:  return sum;
+    40000:   20-block  0
+unconditional  0 taken 40000
+        -:   21:}
+function discardCardsInDeck called 38452 returned 100% blocks executed 91%
+    38452:   22:int discardCardsInDeck(struct gameState* g, int player){
+    38452:   22-block  0
+    38452:   23:  int i = g->deckCount[player]-1;
+    38452:   24:  int num = 0;
+   676392:   25:  for ( ; i>=0; --i){
+    38452:   25-block  0
+unconditional  0 taken 38452
+   637940:   25-block  1
+unconditional  1 taken 637940
+   676392:   25-block  2
+branch  2 taken 676392
+branch  3 taken 0 (fallthrough)
+   676392:   26:    int card = g->deck[player][i];
+   676392:   27:    if (card == 4 || card == 5 || card == 6)
+   676392:   27-block  0
+branch  0 taken 651028 (fallthrough)
+branch  1 taken 25364
+   651028:   27-block  1
+branch  2 taken 625308 (fallthrough)
+branch  3 taken 25720
+   625308:   27-block  2
+branch  4 taken 25820 (fallthrough)
+branch  5 taken 599488
+    76904:   28:      num += 1;
+    76904:   28-block  0
+unconditional  0 taken 76904
+   676392:   29:    if (num == 2)
+   676392:   29-block  0
+branch  0 taken 38452 (fallthrough)
+branch  1 taken 637940
+    38452:   30:      return g->deckCount[player]-i;
+    38452:   30-block  0
+unconditional  0 taken 38452
+        -:   31:  }
+    #####:   32:  return -1;
+    $$$$$:   32-block  0
+unconditional  0 never executed
+        -:   33:}
+        -:   34:
+function testAdventurer called 40000 returned 100% blocks executed 100%
+    40000:   35:void testAdventurer(int testCase, struct gameState* pre, struct gameState* post, int player, int handPos)
+    40000:   35-block  0
+        -:   36:{
+    40000:   37:  if (TreasureCardInDeck(pre, player)>=2)
+    40000:   37-block  0
+call    0 returned 40000
+branch  1 taken 38452 (fallthrough)
+branch  2 taken 1548
+    38452:   37-block  1
+unconditional  3 taken 38452
+        -:   38:  {
+        -:   39:    if (MY_DEBUG == 1) {
+        -:   40:      printf("prepre??????????????????????????????????????????????????????????????\n");
+        -:   41:      printGameState(pre,player); 
+        -:   42:    }
+    38452:   43:    pre->handCount[player] += 1;
+    38452:   44:    int discardNum = discardCardsInDeck(pre,player); 
+    38452:   44-block  0
+call    0 returned 38452
+    38452:   45:    pre->deckCount[player] -= discardNum; 
+    38452:   46:    pre->discardCount[player] += discardNum -1; 
+    38452:   47:    memcpy(pre->hand[player], post->hand[player], sizeof(int)*post->handCount[player]);
+    38452:   48:    memcpy(pre->discard[player], post->discard[player], sizeof(int)*post->discardCount[player]);
+unconditional  0 taken 38452
+        -:   49:    if (MY_DEBUG == 1) {
+        -:   50:      printf("pre-----------------------------------------------------------------\n");
+        -:   51:      printGameState(pre,player); 
+        -:   52:      printf("post****************************************************************\n");
+        -:   53:      printGameState(post,player); 
+        -:   54:    }
+    38452:   55:    bool result = memcpy(pre, post, sizeof(struct gameState))==0;
+        -:   56:
+    38452:   57:    if (!result) {
+    38452:   57-block  0
+branch  0 taken 38452 (fallthrough)
+branch  1 taken 0
+    40000:   58:      printf("Test Adventurer card: case %d fail: when deck has more than two treasure cards\n", testCase);
+    38452:   58-block  0
+call    0 returned 38452
+unconditional  1 taken 38452
+    38452:   58-block  1
+unconditional  2 taken 38452
+     1548:   58-block  2
+unconditional  3 taken 1548
+        -:   59:    }
+        -:   60:  }
+        -:   61:  else {
+        -:   62:    if (MY_DEBUG == 1) {
+        -:   63:      printf("prepre??????????????????????????????????????????????????????????????\n");
+        -:   64:      printGameState(pre,player); 
+        -:   65:    }
+     1548:   66:    pre->handCount[player] += 1;
+     1548:   67:    pre->deckCount[player] = pre->discardCount[player]+pre->deckCount[player]-2; 
+     1548:   68:    pre->discardCount[player] = 1; 
+     1548:   69:    memcpy(pre->hand[player], post->hand[player], sizeof(int)*post->handCount[player]);
+     1548:   70:    memcpy(pre->deck[player], post->deck[player], sizeof(int)*post->deckCount[player]);
+     1548:   71:    memcpy(pre->discard[player], post->discard[player], sizeof(int)*post->discardCount[player]);
+     1548:   71-block  0
+unconditional  0 taken 1548
+        -:   72:    if (MY_DEBUG == 1) {
+        -:   73:      printf("pre-----------------------------------------------------------------\n");
+        -:   74:      printGameState(pre,player); 
+        -:   75:      printf("post****************************************************************\n");
+        -:   76:      printGameState(post,player); 
+        -:   77:    }
+     1548:   78:    bool result = memcpy(pre, post, sizeof(struct gameState))==0;
+        -:   79:
+     1548:   80:    if (!result) {
+     1548:   80-block  0
+branch  0 taken 1548 (fallthrough)
+branch  1 taken 0
+     1548:   81:      printf("Test Adventurer card: case %d fail: when deck has less than two treasure cards\n", testCase);
+     1548:   81-block  0
+call    0 returned 1548
+unconditional  1 taken 1548
+        -:   82:    }
+        -:   83:  }
+        -:   84:    
+    40000:   85:}
+        -:   86:
+        -:   87:
+function main called 4 returned 100% blocks executed 100%
+        8:   88:int main(){
+        4:   88-block  0
+        4:   88-block  1
+unconditional  0 taken 4
+        -:   89:  
+        -:   90:  struct gameState pre, post;
+        -:   91:  int randomTest;
+        -:   92:  if (MY_DEBUG  == 1){
+        -:   93:    randomTest = 20;
+        -:   94:  } else {
+        4:   95:    randomTest = 10000;
+        -:   96:  }
+        -:   97:  int n;
+    40004:   98:  for (n=0; n<randomTest; ++n) {
+        4:   98-block  0
+unconditional  0 taken 4
+unconditional  1 taken 40000
+    40004:   98-block  1
+branch  2 taken 40000
+branch  3 taken 4 (fallthrough)
+    40000:   99:    int player = floor(Random()*MAX_PLAYERS);
+    40000:   99-block  0
+call    0 returned 40000
+    40000:  100:    generateRandomGameState(&pre, player, true);
+call    0 returned 40000
+        -:  101:    //printGameState(&pre,player); 
+    40000:  102:    memcpy(&post, &pre, sizeof(struct gameState));
+    40000:  103:    int handPos = floor(Random()*pre.handCount[player]);
+call    0 returned 40000
+        -:  104:    //printf("hand position is %d\n", handPos);
+    40000:  105:    cardEffectAdventurer(player, &post, handPos);
+call    0 returned 40000
+        -:  106:    //printGameState(&pre,player); 
+    40000:  107:    testAdventurer(n, &pre, &post, player, handPos);
+call    0 returned 40000
+        -:  108:    
+        -:  109:  } 
+        4:  110:  return 0;
+        4:  110-block  0
+unconditional  0 taken 4
+        -:  111:}

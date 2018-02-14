@@ -1,0 +1,202 @@
+        -:    0:Source:randomtestcard2.c
+        -:    0:Graph:randomtestcard2.gcno
+        -:    0:Data:randomtestcard2.gcda
+        -:    0:Runs:3
+        -:    0:Programs:1
+        -:    1:#include "dominion.h"
+        -:    2:#include "dominion_helpers.h"
+        -:    3:#include "test_helper.h"
+        -:    4:#include "rngs.h"
+        -:    5:#include <stdlib.h>
+        -:    6:#include <stdio.h>
+        -:    7:#include <string.h>
+        -:    8:#include <assert.h>
+        -:    9:#include <math.h>
+        -:   10:#include <stdbool.h>
+        -:   11:
+        -:   12:
+function testSmithy called 30000 returned 100% blocks executed 100%
+    30000:   13:void testSmithy(int testCase, struct gameState* pre, struct gameState* post, int player, int handPos)
+    30000:   13-block  0
+        -:   14:{
+        -:   15:  bool result;
+    30000:   16:  if (pre->deckCount[player]<3){
+    30000:   16-block  0
+branch  0 taken 189 (fallthrough)
+branch  1 taken 29811
+      189:   16-block  1
+unconditional  2 taken 189
+        -:   17:    if (MY_DEBUG == 1) {
+        -:   18:      printf("prepre??????????????????????????????????????????????????????????????\n");
+        -:   19:      printGameState(pre,player); 
+        -:   20:    }
+        -:   21:
+      189:   22:    pre->handCount[player] = pre->handCount[player]+3;
+      189:   23:    memcpy(pre->hand[player], post->hand[player], sizeof(int)*post->handCount[player]);
+      189:   24:    pre->deckCount[player] = pre->discardCount[player] - (3 - pre->deckCount[player]);
+      189:   25:    memcpy(pre->deck[player], post->deck[player], sizeof(int)*post->deckCount[player]);
+      189:   26:    pre->discard[player][0]=pre->hand[player][handPos];
+      189:   27:    int i = 1;
+    43470:   28:    for (; i<pre->discardCount[player]; ++i){
+      189:   28-block  0
+unconditional  0 taken 189
+    43281:   28-block  1
+unconditional  1 taken 43281
+    43470:   28-block  2
+branch  2 taken 43281
+branch  3 taken 189 (fallthrough)
+    43281:   29:      pre->discard[player][i] = -1;
+        -:   30:    }
+      189:   31:    pre->discardCount[player] = 1;
+      189:   31-block  0
+unconditional  0 taken 189
+        -:   32:
+        -:   33:    if (MY_DEBUG == 1) {
+        -:   34:      printf("pre-----------------------------------------------------------------\n");
+        -:   35:      printGameState(pre,player); 
+        -:   36:      printf("post****************************************************************\n");
+        -:   37:      printGameState(post,player); 
+        -:   38:    }
+        -:   39:
+      189:   40:    result = memcpy(pre, post, sizeof(struct gameState))==0;
+        -:   41:
+      189:   42:    if (!result) {
+      189:   42-block  0
+branch  0 taken 189 (fallthrough)
+branch  1 taken 0
+      189:   43:      printf("Test Smithy card: case %d fail: Testing when deckCount is smaller than 3\n", testCase);
+      189:   43-block  0
+call    0 returned 189
+unconditional  1 taken 189
+      189:   43-block  1
+unconditional  2 taken 189
+        -:   44:    }
+        -:   45:  }
+    29811:   46:  else if (handPos == pre->handCount[player]-1){
+    29811:   46-block  0
+branch  0 taken 378 (fallthrough)
+branch  1 taken 29433
+      378:   46-block  1
+unconditional  2 taken 378
+        -:   47:    if (MY_DEBUG == 1) {
+        -:   48:      printf("prepre??????????????????????????????????????????????????????????????\n");
+        -:   49:      printGameState(pre,player); 
+        -:   50:    }
+        -:   51:    
+      378:   52:    int discardCard = pre->hand[player][handPos];
+      378:   53:    pre->hand[player][handPos] = pre->deck[player][pre->deckCount[player]-1];
+      378:   54:    pre->hand[player][handPos+1] = pre->deck[player][pre->deckCount[player]-2];
+      378:   55:    pre->hand[player][handPos+2] = pre->deck[player][pre->deckCount[player]-3];
+      378:   56:    pre->handCount[player] = pre->handCount[player]+2;
+        -:   57:
+      378:   58:    pre->deckCount[player] -= 3;
+        -:   59:
+      378:   60:    pre->discard[player][pre->discardCount[player]] = discardCard; 
+      378:   61:    pre->discardCount[player] += 1;
+      378:   61-block  0
+unconditional  0 taken 378
+        -:   62:    if (MY_DEBUG == 1) {
+        -:   63:      printf("pre-----------------------------------------------------------------\n");
+        -:   64:      printGameState(pre,player); 
+        -:   65:      printf("post****************************************************************\n");
+        -:   66:      printGameState(post,player); 
+        -:   67:    }
+      378:   68:    bool result = memcpy(pre, post, sizeof(struct gameState))==0;
+        -:   69:
+      378:   70:    if (!result) {
+      378:   70-block  0
+branch  0 taken 378 (fallthrough)
+branch  1 taken 0
+    29811:   71:      printf("Test Smithy card: case %d fail: Testing when deckCount is greater than 3 and current Hand is the last card in the hand pile\n", testCase);
+      378:   71-block  0
+call    0 returned 378
+unconditional  1 taken 378
+      378:   71-block  1
+unconditional  2 taken 378
+    29433:   71-block  2
+unconditional  3 taken 29433
+        -:   72:    }
+        -:   73:  }
+        -:   74:  else  {
+        -:   75:    if (MY_DEBUG == 1) {
+        -:   76:      printf("prepre??????????????????????????????????????????????????????????????\n");
+        -:   77:      printGameState(pre,player); 
+        -:   78:    }
+        -:   79:    
+    29433:   80:    int discardCard = pre->hand[player][handPos];
+    29433:   81:    pre->hand[player][handPos] = pre->hand[player][pre->handCount[player]-1];
+    29433:   82:    pre->hand[player][pre->handCount[player]-1] = pre->deck[player][pre->deckCount[player]-1];
+    29433:   83:    pre->hand[player][pre->handCount[player]] = pre->deck[player][pre->deckCount[player]-2];
+    29433:   84:    pre->hand[player][pre->handCount[player]+1] = pre->deck[player][pre->deckCount[player]-3];
+    29433:   85:    pre->handCount[player] = pre->handCount[player]+2;
+        -:   86:
+    29433:   87:    pre->deckCount[player] -= 3;
+        -:   88:
+    29433:   89:    pre->discard[player][pre->discardCount[player]] = discardCard; 
+    29433:   90:    pre->discardCount[player] += 1;
+    29433:   90-block  0
+unconditional  0 taken 29433
+        -:   91:    if (MY_DEBUG == 1) {
+        -:   92:      printf("pre-----------------------------------------------------------------\n");
+        -:   93:      printGameState(pre,player); 
+        -:   94:      printf("post****************************************************************\n");
+        -:   95:      printGameState(post,player); 
+        -:   96:    }
+        -:   97:
+    29433:   98:    bool result = memcpy(pre, post, sizeof(struct gameState))==0;
+        -:   99:
+    29433:  100:    if (!result) {
+    29433:  100-block  0
+branch  0 taken 29433 (fallthrough)
+branch  1 taken 0
+    29433:  101:      printf("Test Smithy card: case %d fail: Testing when deckCount is greater than 3 and current Hand is in the middle of the hand pile\n", testCase);
+    29433:  101-block  0
+call    0 returned 29433
+unconditional  1 taken 29433
+        -:  102:    }
+        -:  103:
+        -:  104:  }
+        -:  105:
+    30000:  106:}
+        -:  107:
+        -:  108:
+function main called 3 returned 100% blocks executed 100%
+        6:  109:int main(){
+        3:  109-block  0
+        3:  109-block  1
+unconditional  0 taken 3
+        -:  110:  
+        -:  111:  struct gameState pre, post;
+        -:  112:  int randomTest;
+        -:  113:  if (MY_DEBUG == 1){
+        -:  114:    randomTest = 20;
+        -:  115:  } else {
+        3:  116:    randomTest = 10000;
+        -:  117:  }
+        -:  118:  int n;
+    30003:  119:  for (n=0; n<randomTest; ++n) {
+        3:  119-block  0
+unconditional  0 taken 3
+unconditional  1 taken 30000
+    30003:  119-block  1
+branch  2 taken 30000
+branch  3 taken 3 (fallthrough)
+    30000:  120:    int player = floor(Random()*MAX_PLAYERS);
+    30000:  120-block  0
+call    0 returned 30000
+    30000:  121:    generateRandomGameState(&pre, player,false);
+call    0 returned 30000
+    30000:  122:    memcpy(&post, &pre, sizeof(struct gameState));
+    30000:  123:    int handPos = floor(Random()*pre.handCount[player]);
+call    0 returned 30000
+        -:  124:    //printf("hand position is %d\n", handPos);
+    30000:  125:    cardEffectSmithy(player, &post, handPos);
+call    0 returned 30000
+    30000:  126:    testSmithy(n, &pre, &post, player, handPos);
+call    0 returned 30000
+        -:  127:    
+        -:  128:  } 
+        3:  129:  return 0;
+        3:  129-block  0
+unconditional  0 taken 3
+        -:  130:}
