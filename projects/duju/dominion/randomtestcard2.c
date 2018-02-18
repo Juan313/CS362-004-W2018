@@ -116,7 +116,7 @@ int main(){
     randomTest = 10000;
   }
   int n;
-  for (n=0; n<randomTest*.75; ++n) {
+  for (n=0; n<randomTest; ++n) {
     int player = floor(Random()*MAX_PLAYERS);
     generateRandomGameState(&pre, player,false);
     memcpy(&post, &pre, sizeof(struct gameState));

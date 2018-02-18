@@ -31,11 +31,10 @@ randomtestcard2: randomtestcard2.c dominion.o rngs.o test_helper.o
 randomtestcard3: randomtestcard3.c dominion.o rngs.o test_helper.o
 	gcc -o randomtestcard3 -g randomtestcard3.c dominion.o rngs.o test_helper.o $(CFLAGS)
 randomtest: randomtestcard1 randomtestcard2 randomtestcard3
-	./randomtestcard1 > randomtestcard1.out
-	./randomtestcard2 > randomtestcard2.out
-	./randomtestcard3 > randomtestcard3.out
-
-randomTest: randomtestcard1
+	./randomtestcard1 > randomtestcard.out
+	./randomtestcard2 >> randomtestcard.out
+	./randomtestcard3 >> randomtestcard.out
+	gcov -b dominion.c >> randomtestcard.out
 
 interface.o: interface.h interface.c
 	gcc -c interface.c -g  $(CFLAGS)
@@ -52,4 +51,4 @@ player: player.c interface.o
 all: playdom player testDrawCard testBuyCard badTestDrawCard
 
 clean:
-	rm -f *.o playdom.exe playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe
+	rm -f *.o playdom.exe playdom player player.exe randomtestcard1 randomtestcard2 randomtestcard3 *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe
