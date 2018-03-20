@@ -116,7 +116,7 @@ public class UrlValidatorTest extends TestCase {
 	    UrlValidator urlVal = new UrlValidator();
 		
 		//Default is to not print output from passing tests because we are only concerned with failures
-		boolean PRINTPASSES = true;
+		boolean PRINTPASSES = false;
 
 		//Valid schemes
 		String[] validSchemes = {"http://", "ftp://", "https://"};
